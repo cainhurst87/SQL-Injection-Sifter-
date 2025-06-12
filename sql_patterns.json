@@ -1,0 +1,54 @@
+{
+  "patterns": [
+    {
+      "regex": "(?i)\\b(?:SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|EXEC|UNION)\\b",
+      "weight": 1.0,
+      "description": "Comandos SQL perigosos"
+    },
+    {
+      "regex": "(?i)\\b(?:OR\\s+'?1'?\\s*=\\s*'?1|OR\\s+\\d+\\s*=\\s*\\d+)\\b",
+      "weight": 1.3,
+      "description": "Bypass de autenticação"
+    },
+    {
+      "regex": "(?:'|\\\")(?:;|--|#)",
+      "weight": 1.2,
+      "description": "Comentários maliciosos"
+    },
+    {
+      "regex": "(?:\\b(?:AND|OR)\\b\\s*(?:\\d+|'[^']+')?\\s*[=<>]+\\s*(?:\\d+|'[^']+'))",
+      "weight": 0.9,
+      "description": "Condições suspeitas"
+    },
+    {
+      "regex": "(?i)\\b(?:INFORMATION_SCHEMA|sys\\.|pg_catalog)\\b",
+      "weight": 0.8,
+      "description": "Metadados de banco de dados"
+    },
+    {
+      "regex": "(?i)\\b(?:WAITFOR|DELAY|SLEEP|BENCHMARK)\\b",
+      "weight": 1.1,
+      "description": "Ataques de tempo/delay"
+    },
+    {
+      "regex": "(?i)\\b(?:XP_|sp_|fn_)\\w+\\b",
+      "weight": 1.2,
+      "description": "Procedimentos estendidos"
+    },
+    {
+      "regex": "(?:\\*|\\/|=|!|>|<|\\||&){2,}",
+      "weight": 0.7,
+      "description": "Operadores repetidos"
+    },
+    {
+      "regex": "\\b(?:true|false|null)\\b",
+      "weight": 0.3,
+      "description": "Valores reservados"
+    },
+    {
+      "regex": "\\b\\d{4}-\\d{2}-\\d{2}\\b|\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b",
+      "weight": 0.4,
+      "description": "Datas/IPs"
+    }
+  ]
+}
